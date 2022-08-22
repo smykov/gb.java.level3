@@ -7,7 +7,52 @@ import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
+        task1();
+        task2();
 
+        Box<Orange> orangeBox = new Box<>(
+                new Orange(),
+                new Orange(),
+                new Orange()
+        );
+        Box<Apple> appleBox = new Box<>(
+                new Apple(),
+                new Apple()
+        );
+        Box<GoldenApple> goldenAppleBox = new Box<>(
+                new GoldenApple(),
+                new GoldenApple(),
+                new GoldenApple()
+        );
+
+        System.out.println(appleBox.GetWeight());
+
+        orangeBox.addFruit(new Orange());
+        appleBox.addFruit(new GoldenApple());
+        appleBox.addFruit(new Apple());
+
+        System.out.println(appleBox.GetWeight());
+
+        goldenAppleBox.moveTo(appleBox);
+
+        if (appleBox.compare(goldenAppleBox)) {
+            System.out.println("Коробки равны!");
+        } else {
+            System.out.println("Коробки не равны!");
+        }
+
+
+    }
+
+    private static void task2() {
+        Integer[] arrayInts = new Integer[]{1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+        String[] arrayStr = new String[]{"a", "b", "c", "d", "e", "f", "g", "h"};
+        List resultList = new ArrayList<>();
+        resultList = getArrayList(arrayInts);
+        resultList = getArrayList(arrayStr);
+    }
+
+    private static void task1() {
         Integer[] arrayInts = new Integer[]{1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
         System.out.println(Arrays.toString(arrayInts));
         swap(arrayInts, 4, 8);
@@ -17,11 +62,6 @@ public class Main {
         System.out.println(Arrays.toString(arrayStr));
         swap(arrayStr, 2, 5);
         System.out.println(Arrays.toString(arrayStr));
-
-        List resultList = new ArrayList<>();
-        resultList = getArrayList(arrayInts);
-        resultList = getArrayList(arrayStr);
-
     }
 
     private static <T> List getArrayList(T[] array) {
