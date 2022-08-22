@@ -20,15 +20,12 @@ public class Main {
 
         List resultList = new ArrayList<>();
         resultList = getArrayList(arrayInts);
-
+        resultList = getArrayList(arrayStr);
 
     }
 
-    private static List getArrayList(Integer[] array) {
-        List<Integer> arrayList = new ArrayList<>();
-        Collections.addAll(arrayList, array);
-
-        return arrayList;
+    private static <T> List getArrayList(T[] array) {
+        return Arrays.asList(array);
     }
 
     private static <T> void swap(T[] array, int firstIndex, int secondIndex) {
@@ -41,7 +38,7 @@ public class Main {
         ) {
             throw new IllegalArgumentException();
         }
-        
+
         T firstIndexValue = array[firstIndex];
         array[firstIndex] = array[secondIndex];
         array[secondIndex] = firstIndexValue;
