@@ -8,12 +8,18 @@ import java.util.List;
 public class Main {
     public static void main(String[] args) {
 
-        Integer[] array = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
-        Integer[] result = swap(array, 4, 8);
-        System.out.println(Arrays.toString(result));
+        Integer[] arrayInts = new Integer[]{1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+        System.out.println(Arrays.toString(arrayInts));
+        swap(arrayInts, 4, 8);
+        System.out.println(Arrays.toString(arrayInts));
+
+        String[] arrayStr = new String[]{"a", "b", "c", "d", "e", "f", "g", "h"};
+        System.out.println(Arrays.toString(arrayStr));
+        swap(arrayStr, 2, 5);
+        System.out.println(Arrays.toString(arrayStr));
 
         List resultList = new ArrayList<>();
-        resultList = getArrayList(array);
+        resultList = getArrayList(arrayInts);
 
 
     }
@@ -25,11 +31,19 @@ public class Main {
         return arrayList;
     }
 
-    private static Integer[] swap(Integer[] array, int firstIndex, int secondIndex) {
-        int firstIndexValue = array[firstIndex];
+    private static <T> void swap(T[] array, int firstIndex, int secondIndex) {
+        if (
+                (array == null)
+                        || (firstIndex < 0)
+                        || (secondIndex < 0)
+                        || (firstIndex >= array.length)
+                        || (secondIndex >= array.length)
+        ) {
+            throw new IllegalArgumentException();
+        }
+        
+        T firstIndexValue = array[firstIndex];
         array[firstIndex] = array[secondIndex];
         array[secondIndex] = firstIndexValue;
-
-        return array;
     }
 }
