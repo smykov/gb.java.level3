@@ -2,7 +2,6 @@ package hw1;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 
 public class Main {
@@ -25,20 +24,20 @@ public class Main {
                 new GoldenApple()
         );
 
-        System.out.println(appleBox.GetWeight());
+        System.out.println(appleBox.getWeight());
 
         orangeBox.addFruit(new Orange());
         appleBox.addFruit(new GoldenApple());
         appleBox.addFruit(new Apple());
 
-        System.out.println(appleBox.GetWeight());
+        System.out.println(appleBox.getWeight());
 
         goldenAppleBox.moveTo(appleBox);
 
         if (appleBox.compare(goldenAppleBox)) {
-            System.out.println("Коробки равны!");
+            System.out.println("Коробки с яблоками и апельсинами равны!");
         } else {
-            System.out.println("Коробки не равны!");
+            System.out.println("Коробки с яблоками и апельсинами не равны!");
         }
 
 

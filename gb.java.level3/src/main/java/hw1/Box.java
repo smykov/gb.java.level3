@@ -11,7 +11,7 @@ public class Box<T extends Fruit> {
         this.fruits = new ArrayList<>(Arrays.asList(fruits));
     }
 
-    double GetWeight() {
+    double getWeight() {
         return fruits.stream()
                 .map(Fruit::getWeight)
                 .reduce(Double::sum)
@@ -30,7 +30,7 @@ public class Box<T extends Fruit> {
         this.fruits.addAll(Arrays.asList(fruits));
     }
     public boolean compare(Box<? extends T> box) {
-        return this.GetWeight() == box.GetWeight();
+        return this.getWeight() == box.getWeight();
     }
 
 }
