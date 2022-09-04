@@ -1,11 +1,10 @@
 package lesson4;
 
 public class Store {
-    private final Object monitor = new Object();
     private int product = 0;
 
     public void getProduct() {
-        synchronized (monitor) {
+        synchronized (this) {
             product--;
             System.out.println("Покупатель купил 1 товар.");
             System.out.println("Всего товаров осталось: " + product);
@@ -13,7 +12,7 @@ public class Store {
     }
 
     public void setProduct() {
-        synchronized (monitor) {
+        synchronized (this) {
             product++;
             System.out.println("Продавец пополнил запасы на 1 товар.");
             System.out.println("Всего товаров осталось: " + product);
