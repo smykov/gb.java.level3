@@ -3,20 +3,16 @@ package lesson4;
 public class Store {
     private int product = 0;
 
-    public void getProduct() {
-        synchronized (Store.class) {
-            product--;
-            System.out.println("Покупатель купил 1 товар.");
-            System.out.println("Всего товаров осталось: " + product);
-        }
+    public synchronized void getProduct() {
+        product--;
+        System.out.println("Покупатель купил 1 товар.");
+        System.out.println("Всего товаров осталось: " + product);
     }
 
-    public void setProduct() {
-        synchronized (Store.class) {
-            product++;
-            System.out.println("Продавец пополнил запасы на 1 товар.");
-            System.out.println("Всего товаров осталось: " + product);
-        }
+    public synchronized void setProduct() {
+        product++;
+        System.out.println("Продавец пополнил запасы на 1 товар.");
+        System.out.println("Всего товаров осталось: " + product);
     }
 
 }
