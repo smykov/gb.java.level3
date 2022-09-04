@@ -4,7 +4,7 @@ public class Store {
     private int product = 0;
 
     public void getProduct() {
-        synchronized (this) {
+        synchronized (Store.class) {
             product--;
             System.out.println("Покупатель купил 1 товар.");
             System.out.println("Всего товаров осталось: " + product);
@@ -12,7 +12,7 @@ public class Store {
     }
 
     public void setProduct() {
-        synchronized (this) {
+        synchronized (Store.class) {
             product++;
             System.out.println("Продавец пополнил запасы на 1 товар.");
             System.out.println("Всего товаров осталось: " + product);
