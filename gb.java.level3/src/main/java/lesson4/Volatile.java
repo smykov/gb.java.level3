@@ -1,7 +1,7 @@
 package lesson4;
 
 public class Volatile {
-    private static int myInt = 0;
+    private static volatile int myInt = 0;
 
     public static void main(String[] args) {
         new ChangeListener().start();
