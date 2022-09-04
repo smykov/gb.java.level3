@@ -38,5 +38,7 @@ public class ExecutorsTest {
                 }
             });
         }
+        //новые потоки не создаются, текущие завершают задачу и удаляются
+        treadManager.shutdown();
     }
 }
