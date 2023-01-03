@@ -1,10 +1,20 @@
 package hw5;
 
+import java.util.concurrent.BrokenBarrierException;
+import java.util.concurrent.CyclicBarrier;
+import java.util.concurrent.Semaphore;
+import java.util.concurrent.locks.ReentrantLock;
+
 public class MainClass {
     public static final int CARS_COUNT = 4;
+    protected static final CyclicBarrier barrier = new CyclicBarrier(CARS_COUNT + 1);
+    protected static final Semaphore semaphore = new Semaphore(CARS_COUNT / 2);
+    protected static int countFinished = 0;
+    protected static final ReentrantLock lock = new ReentrantLock();
 
-    public static void main(String[] args) {
-        System.out.println("¬¿∆ÕŒ≈ Œ¡⁄ﬂ¬À≈Õ»≈ >>> œÓ‰„ÓÚÓ‚Í‡!!!");
+    public static void main(String[] args) throws InterruptedException, BrokenBarrierException {
+
+        System.out.println("–í–ê–ñ–ù–û–ï –û–ë–™–Ø–í–õ–ï–ù–ò–ï >>> –ü–æ–¥–≥–æ—Ç–æ–≤–∫–∞!!!");
         Race race = new Race(new Road(60), new Tunnel(), new Road(40));
         Car[] cars = new Car[CARS_COUNT];
         for (int i = 0; i < cars.length; i++) {
@@ -13,8 +23,11 @@ public class MainClass {
         for (Car car : cars) {
             new Thread(car).start();
         }
-        System.out.println("¬¿∆ÕŒ≈ Œ¡⁄ﬂ¬À≈Õ»≈ >>> √ÓÌÍ‡ Ì‡˜‡Î‡Ò¸!!!");
-        System.out.println("¬¿∆ÕŒ≈ Œ¡⁄ﬂ¬À≈Õ»≈ >>> √ÓÌÍ‡ Á‡ÍÓÌ˜ËÎ‡Ò¸!!!");
+
+        barrier.await(); //–∂–¥–µ–º –∫–æ–≥–¥–∞ –≤—Å–µ –±—É–¥—É—Ç –≥–æ—Ç–æ–≤—ã
+        System.out.println("–í–ê–ñ–ù–û–ï –û–ë–™–Ø–í–õ–ï–ù–ò–ï >>> –ì–æ–Ω–∫–∞ –Ω–∞—á–∞–ª–∞—Å—å!!!");
+        barrier.await(); //–∂–¥–µ–º –∫–æ–≥–¥–∞ –≤—Å–µ —Ñ–∏–Ω–∏—à–∏—Ä—É—é—Ç
+        System.out.println("–í–ê–ñ–ù–û–ï –û–ë–™–Ø–í–õ–ï–ù–ò–ï >>> –ì–æ–Ω–∫–∞ –∑–∞–∫–æ–Ω—á–∏–ª–∞—Å—å!!!");
     }
 }
 

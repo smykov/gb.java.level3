@@ -1,24 +1,26 @@
 package hw5;
 
+import static hw5.MainClass.semaphore;
+
 public class Tunnel extends Stage {
     public Tunnel() {
         this.length = 80;
-        this.description = "Тоннель " + length + " метров";
+        this.description = "РўРѕРЅРЅРµР»СЊ " + length + " РјРµС‚СЂРѕРІ";
     }
 
     @Override
     public void go(Car c) {
         try {
             try {
-                System.out.println(c.getName() + " готовится к этапу(ждет): " +
-                        description);
-                System.out.println(c.getName() + " начал этап: " + description);
+                System.out.println(c.getName() + " РіРѕС‚РѕРІРёС‚СЃСЏ Рє СЌС‚Р°РїСѓ(Р¶РґРµС‚): " + description);
+                semaphore.acquire();
+                System.out.println(c.getName() + " РЅР°С‡Р°Р» СЌС‚Р°Рї: " + description);
                 Thread.sleep(length / c.getSpeed() * 1000L);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             } finally {
-                System.out.println(c.getName() + " закончил этап: " +
-                        description);
+                System.out.println(c.getName() + " Р·Р°РєРѕРЅС‡РёР» СЌС‚Р°Рї: " + description);
+                semaphore.release();
             }
         } catch (Exception e) {
             e.printStackTrace();
