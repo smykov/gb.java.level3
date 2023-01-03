@@ -1,10 +1,15 @@
 package hw4;
 
-class PrintChar {
-    private char ch = 'A';
+import java.util.List;
+import java.util.stream.IntStream;
 
-    public synchronized void print(char c) {
-        while (ch != c) {
+class LetterContainer {
+    private static final char FIRST = 'A';
+    private static final char LAST = 'C';
+    private char letter = 'A';
+
+    public synchronized void tryPrint(char target) {
+        while (letter != target) {
             try {
                 wait();
             } catch (InterruptedException e) {
@@ -12,38 +17,38 @@ class PrintChar {
             }
         }
 
-        System.out.print(c);
-        if (ch == 'C') {
-            ch = 'A';
-        } else {
-            ch++;
-        }
+        System.out.print(target);
+        next();
         notifyAll();
     }
 
+    private void next() {
+        if (letter == LAST) {
+            letter = FIRST;
+        } else {
+            letter++;
+        }
+    }
+
     public static void main(String[] args) throws InterruptedException {
-        PrintChar printChar = new PrintChar();
-        Thread threadA = new Thread(() -> {
-            for (int i = 0; i < 5; i++) {
-                printChar.print('A');
-            }
-        });
-        Thread threadB = new Thread(() -> {
-            for (int i = 0; i < 5; i++) {
-                printChar.print('B');
-            }
-        });
-        Thread threadC = new Thread(() -> {
-            for (int i = 0; i < 5; i++) {
-                printChar.print('C');
-            }
-        });
-        threadA.start();
-        threadB.start();
-        threadC.start();
-        threadA.join();
-        threadB.join();
-        threadC.join();
+        final int repeat = 5;
+
+        LetterContainer container = new LetterContainer();
+
+        List<Thread> threads = IntStream.rangeClosed(FIRST, LAST)
+                .mapToObj(it -> (char) it)
+                .map(it -> new Thread(() -> {
+                    for (int j = 0; j < repeat; j++) {
+                        container.tryPrint(it);
+                    }
+                }))
+                .peek(Thread::start)
+                .toList();
+
+        for (Thread thread : threads) {
+            thread.join();
+        }
+        System.out.println();
     }
 
 }
