@@ -1,13 +1,12 @@
 package lesson5;
 
-import java.util.concurrent.CountDownLatch;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
+import java.util.concurrent.*;
 
 public class CountDownLatchDemo {
+
     public static void main(String[] args) {
         int count = 4;
-        CountDownLatch countDownLatch = new CountDownLatch(count);
+        CountDownLatch cdl = new CountDownLatch(4);
 
         ExecutorService pool = Executors.newCachedThreadPool();
         for (int i = 0; i < count; i++) {
@@ -16,12 +15,12 @@ public class CountDownLatchDemo {
                 ThreadUtils.sleep(2, 7);
                 ThreadUtils.log("Подошел к месту сбора");
 
-                countDownLatch.countDown();
+                cdl.countDown();
             });
         }
 
         try {
-            countDownLatch.await();
+            cdl.await();
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
@@ -30,4 +29,5 @@ public class CountDownLatchDemo {
 
         pool.shutdown();
     }
+
 }
